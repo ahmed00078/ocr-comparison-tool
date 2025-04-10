@@ -8,7 +8,7 @@ from PIL import Image
 import cv2
 import pytesseract
 import easyocr
-import kraken.pyre
+# import kraken.pyre
 from difflib import SequenceMatcher
 import Levenshtein
 import requests
@@ -31,7 +31,7 @@ class OCRModelComparator:
         self.available_models = {
             'tesseract': self._tesseract_ocr,
             'easyocr': self._easyocr_ocr,
-            'kraken': self._kraken_ocr,
+            # 'kraken': self._kraken_ocr,
             'trocr': self._trocr_ocr,
             'paddleocr': self._paddleocr_ocr
         }
@@ -117,27 +117,27 @@ class OCRModelComparator:
             print(f"Error with EasyOCR: {e}")
             return {'text': '', 'processing_time': 0}
     
-    def _kraken_ocr(self, image_path):
-        """Run Kraken OCR on an image"""
-        try:
-            start_time = time.time()
-            image = Image.open(image_path)
-            # Convert to binary image if not already
-            if image.mode != '1':
-                image = image.convert('1')
+    # def _kraken_ocr(self, image_path):
+    #     """Run Kraken OCR on an image"""
+    #     try:
+    #         start_time = time.time()
+    #         image = Image.open(image_path)
+    #         # Convert to binary image if not already
+    #         if image.mode != '1':
+    #             image = image.convert('1')
             
-            binarized_image = kraken.pyre.binarization.nlbin(image)
-            segmentation = kraken.pyre.segmentation.segment(binarized_image)
-            text = kraken.pyre.ocr.ocr_lines(binarized_image, segmentation)
-            end_time = time.time()
+    #         binarized_image = kraken.pyre.binarization.nlbin(image)
+    #         segmentation = kraken.pyre.segmentation.segment(binarized_image)
+    #         text = kraken.pyre.ocr.ocr_lines(binarized_image, segmentation)
+    #         end_time = time.time()
             
-            return {
-                'text': text,
-                'processing_time': end_time - start_time
-            }
-        except Exception as e:
-            print(f"Error with Kraken OCR: {e}")
-            return {'text': '', 'processing_time': 0}
+    #         return {
+    #             'text': text,
+    #             'processing_time': end_time - start_time
+    #         }
+    #     except Exception as e:
+    #         print(f"Error with Kraken OCR: {e}")
+    #         return {'text': '', 'processing_time': 0}
     
     def _trocr_ocr(self, image_path):
         """Run TrOCR on an image"""
@@ -464,8 +464,11 @@ class OCRModelComparator:
         # 2. Heatmap of average metrics by model
         plt.figure(figsize=(12, 8))
         
-        # Prepare heatmap data
-        heatmap_data = df.groupby('Model').mean()[['CER', 'WER', 'Similarity', 'Processing Time']]
+        # Define the columns you actually want to average
+        numeric_cols = ['CER', 'WER', 'Similarity', 'Processing Time']
+
+        # Group by 'Model', select only the numeric columns, then calculate the mean
+        heatmap_data = df.groupby('Model')[numeric_cols].mean()
         
         # Normalize for better visualization
         normalized_data = heatmap_data.copy()
@@ -512,7 +515,7 @@ def download_test_data(output_dir='test_data'):
 
 def main():
     parser = argparse.ArgumentParser(description='OCR Model Comparison Tool')
-    parser.add_argument('--models', type=str, nargs='+', choices=['tesseract', 'easyocr', 'kraken', 'trocr', 'paddleocr'],
+    parser.add_argument('--models', type=str, nargs='+', choices=['tesseract', 'easyocr', 'trocr', 'paddleocr'],
                         default=['tesseract', 'easyocr'], help='OCR models to test')
     parser.add_argument('--images', type=str, required=True, help='Directory containing test images')
     parser.add_argument('--ground-truth', type=str, help='Directory containing ground truth text files')

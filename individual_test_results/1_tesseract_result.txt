@@ -1,0 +1,9 @@
+Model: tesseract
+Image: test_data/images/1.jpg
+Processing time: 0.00 seconds
+
+EXTRACTED TEXT:
+----------------------------------------
+
+----------------------------------------
+

@@ -60,6 +60,8 @@ ocr-comparison-tool/
 
 2. Install dependencies:
    ```bash
+   python -m venv ocr-env
+   source ocr-env/Scripts/activate
    pip install -r requirements.txt
    ```
 

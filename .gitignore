@@ -1,0 +1,10 @@
+# Ignore EasyOCR downloaded models
+.EasyOCR
+/.EasyOCR
+
+.paddleocr
+/.paddleocr
+
+ocr-env
+.ocr-env
+./ocr-env

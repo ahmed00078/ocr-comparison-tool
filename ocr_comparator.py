@@ -62,8 +62,8 @@ class OCRModelComparator:
                 try:
                     print(f"Initializing {model_name}...")
                     self.initialized_models[model_name] = {
-                        'processor': TrOCRProcessor.from_pretrained('microsoft/trocr-base-printed'),
-                        'model': VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-printed')
+                        'processor': TrOCRProcessor.from_pretrained('microsoft/trocr-large-printed'),
+                        'model': VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-large-printed')
                     }
                 except Exception as e:
                     print(f"Failed to initialize {model_name}: {e}")
@@ -199,6 +199,9 @@ class OCRModelComparator:
         # Clean up texts
         extracted_text = extracted_text.strip().lower()
         ground_truth = ground_truth.strip().lower()
+
+        print(f"Extracted text: {extracted_text}")
+        print(f"Ground truth: {ground_truth}")
         
         # Character Error Rate (CER)
         edit_distance = Levenshtein.distance(extracted_text, ground_truth)
@@ -245,6 +248,7 @@ class OCRModelComparator:
                 if os.path.exists(gt_path):
                     with open(gt_path, 'r', encoding='utf-8') as f:
                         ground_truth = f.read()
+            print(f"Ground truth for {image_file}: {ground_truth}")
             
             # Process with each model
             for model_name in self.models_to_test:

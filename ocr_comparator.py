@@ -8,7 +8,6 @@ from PIL import Image
 import cv2
 import pytesseract
 import easyocr
-# import kraken.pyre
 from difflib import SequenceMatcher
 import Levenshtein
 import requests
@@ -31,7 +30,6 @@ class OCRModelComparator:
         self.available_models = {
             'tesseract': self._tesseract_ocr,
             'easyocr': self._easyocr_ocr,
-            # 'kraken': self._kraken_ocr,
             'trocr': self._trocr_ocr,
             'paddleocr': self._paddleocr_ocr
         }
@@ -116,28 +114,6 @@ class OCRModelComparator:
         except Exception as e:
             print(f"Error with EasyOCR: {e}")
             return {'text': '', 'processing_time': 0}
-    
-    # def _kraken_ocr(self, image_path):
-    #     """Run Kraken OCR on an image"""
-    #     try:
-    #         start_time = time.time()
-    #         image = Image.open(image_path)
-    #         # Convert to binary image if not already
-    #         if image.mode != '1':
-    #             image = image.convert('1')
-            
-    #         binarized_image = kraken.pyre.binarization.nlbin(image)
-    #         segmentation = kraken.pyre.segmentation.segment(binarized_image)
-    #         text = kraken.pyre.ocr.ocr_lines(binarized_image, segmentation)
-    #         end_time = time.time()
-            
-    #         return {
-    #             'text': text,
-    #             'processing_time': end_time - start_time
-    #         }
-    #     except Exception as e:
-    #         print(f"Error with Kraken OCR: {e}")
-    #         return {'text': '', 'processing_time': 0}
     
     def _trocr_ocr(self, image_path):
         """Run TrOCR on an image"""

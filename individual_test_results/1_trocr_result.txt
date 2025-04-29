@@ -1,10 +1,10 @@
 Model: trocr
-Image: test_data/images/1.jng
-Processing time: 0.00 seconds
+Image: test_data/images/1.jpg
+Processing time: 3.81 seconds
 
 EXTRACTED TEXT:
 ----------------------------------------
-
+TTTTTTTTTTTT
 ----------------------------------------
 
 GROUND TRUTH TEXT:
@@ -22,7 +22,7 @@ Rank Nation Gold Silver Bronze Total
 
 METRICS:
 ----------------------------------------
-Character Error Rate (CER): 1.0000
-Word Error Rate (WER): 3.8154
+Character Error Rate (CER): 0.9516
+Word Error Rate (WER): 3.6308
 Similarity Ratio: 0.0000
 ----------------------------------------

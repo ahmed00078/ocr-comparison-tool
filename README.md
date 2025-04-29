@@ -60,8 +60,12 @@ ocr-comparison-tool/
 
 2. Install dependencies:
    ```bash
+   # Windows
    python -m venv ocr-env
    source ocr-env/Scripts/activate
+   # Linux
+   irtualenv --python=python3 ocr-env
+   source ocr-env/bin/activate
    pip install -r requirements.txt
    ```
 

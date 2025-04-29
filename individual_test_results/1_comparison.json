@@ -1,0 +1,46 @@
+{
+  "tesseract": {
+    "model": "tesseract",
+    "image": "test_data/images/1.jng",
+    "text": "",
+    "processing_time": 0,
+    "metrics": {
+      "character_error_rate": 1.0,
+      "word_error_rate": 3.8153846153846156,
+      "similarity_ratio": 0.0
+    }
+  },
+  "easyocr": {
+    "model": "easyocr",
+    "image": "test_data/images/1.jng",
+    "text": "",
+    "processing_time": 0,
+    "metrics": {
+      "character_error_rate": 1.0,
+      "word_error_rate": 3.8153846153846156,
+      "similarity_ratio": 0.0
+    }
+  },
+  "trocr": {
+    "model": "trocr",
+    "image": "test_data/images/1.jng",
+    "text": "",
+    "processing_time": 0,
+    "metrics": {
+      "character_error_rate": 1.0,
+      "word_error_rate": 3.8153846153846156,
+      "similarity_ratio": 0.0
+    }
+  },
+  "paddleocr": {
+    "model": "paddleocr",
+    "image": "test_data/images/1.jng",
+    "text": "",
+    "processing_time": 0,
+    "metrics": {
+      "character_error_rate": 1.0,
+      "word_error_rate": 3.8153846153846156,
+      "similarity_ratio": 0.0
+    }
+  }
+}

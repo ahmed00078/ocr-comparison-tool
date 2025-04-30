@@ -401,39 +401,39 @@ class OCRModelComparator:
         for model_name, model_results in self.results.items():
             for image_file in model_results['metrics']:
                 data.append({
-                    'Model': model_name,
-                    'Image': image_file,
-                    'CER': model_results['metrics'][image_file]['character_error_rate'],
-                    'WER': model_results['metrics'][image_file]['word_error_rate'],
-                    'Similarity': model_results['metrics'][image_file]['similarity_ratio'],
-                    'Processing Time': model_results['processing_times'][image_file]
-                })
-        
+                    'model': model_name,  # Changé de 'Model' à 'model' pour assurer la cohérence
+                    'image': image_file,
+                    'cer': model_results['metrics'][image_file]['character_error_rate'],
+                    'wer': model_results['metrics'][image_file]['word_error_rate'],
+                    'similarity': model_results['metrics'][image_file]['similarity_ratio'],
+                    'processing_time': model_results['processing_times'][image_file]
+                    })
+            
         df = pd.DataFrame(data)
         
         # 1. Boxplots of metrics distributions
         plt.figure(figsize=(15, 10))
         
         plt.subplot(2, 2, 1)
-        sns.boxplot(x='Model', y='CER', data=df)
+        sns.boxplot(x='model', y='cer', data=df)  # Changé de 'Model' à 'model' et 'CER' à 'cer'
         plt.title('Character Error Rate Distribution')
         plt.xticks(rotation=45)
         plt.grid(axis='y', linestyle='--', alpha=0.7)
         
         plt.subplot(2, 2, 2)
-        sns.boxplot(x='Model', y='WER', data=df)
+        sns.boxplot(x='model', y='wer', data=df)  # Changé de 'Model' à 'model' et 'WER' à 'wer'
         plt.title('Word Error Rate Distribution')
         plt.xticks(rotation=45)
         plt.grid(axis='y', linestyle='--', alpha=0.7)
         
         plt.subplot(2, 2, 3)
-        sns.boxplot(x='Model', y='Similarity', data=df)
+        sns.boxplot(x='model', y='similarity', data=df)  # Changé de 'Model' à 'model' et 'Similarity' à 'similarity'
         plt.title('Similarity Distribution')
         plt.xticks(rotation=45)
         plt.grid(axis='y', linestyle='--', alpha=0.7)
         
         plt.subplot(2, 2, 4)
-        sns.boxplot(x='Model', y='Processing Time', data=df)
+        sns.boxplot(x='model', y='processing_time', data=df)  # Changé de 'Model' à 'model' et 'Processing Time' à 'processing_time'
         plt.title('Processing Time Distribution')
         plt.xticks(rotation=45)
         plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -445,15 +445,15 @@ class OCRModelComparator:
         plt.figure(figsize=(12, 8))
         
         # Define the columns you actually want to average
-        numeric_cols = ['CER', 'WER', 'Similarity', 'Processing Time']
-
-        # Group by 'Model', select only the numeric columns, then calculate the mean
-        heatmap_data = df.groupby('Model')[numeric_cols].mean()
+        numeric_cols = ['cer', 'wer', 'similarity', 'processing_time']  # Changé pour utiliser les noms en minuscules
+    
+        # Group by 'model', select only the numeric columns, then calculate the mean
+        heatmap_data = df.groupby('model')[numeric_cols].mean()  # Changé de 'Model' à 'model'
         
         # Normalize for better visualization
         normalized_data = heatmap_data.copy()
         for col in normalized_data.columns:
-            if col == 'Similarity':  # Higher is better
+            if col == 'similarity':  # Higher is better
                 normalized_data[col] = (normalized_data[col] - normalized_data[col].min()) / \
                                       (normalized_data[col].max() - normalized_data[col].min())
             else:  # Lower is better

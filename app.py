@@ -390,14 +390,12 @@ def sidebar_config():
     tesseract = st.sidebar.checkbox("Tesseract OCR", value=True, help="Le moteur OCR open-source le plus connu")
     easyocr = st.sidebar.checkbox("EasyOCR", value=True, help="Basé sur les réseaux de neurones, simple à utiliser")
     trocr = st.sidebar.checkbox("TrOCR (Transformers)", value=False, help="Modèle OCR basé sur les transformers")
-    kraken = st.sidebar.checkbox("Kraken OCR", value=False, help="Spécialisé pour les documents historiques")
     paddleocr = st.sidebar.checkbox("PaddleOCR", value=False, help="Développé par Baidu, haut de gamme")
     
     models_to_test = []
     if tesseract: models_to_test.append('tesseract')
     if easyocr: models_to_test.append('easyocr')
     if trocr: models_to_test.append('trocr')
-    if kraken: models_to_test.append('kraken')
     if paddleocr: models_to_test.append('paddleocr')
     
     if not models_to_test:
@@ -406,13 +404,13 @@ def sidebar_config():
     # 2. Options de prétraitement
     st.sidebar.subheader("Prétraitement d'image")
     preprocessing = {}
-    preprocessing["enhance_contrast"] = st.sidebar.checkbox("Amélioration du contraste", value=True, 
+    preprocessing["enhance_contrast"] = st.sidebar.checkbox("Amélioration du contraste", value=False, 
                                                            help="Améliore le contraste pour les petits caractères")
-    preprocessing["remove_noise"] = st.sidebar.checkbox("Réduction du bruit", value=True,
+    preprocessing["remove_noise"] = st.sidebar.checkbox("Réduction du bruit", value=False,
                                                       help="Réduit le bruit d'image pour une meilleure précision")
-    preprocessing["binarize"] = st.sidebar.checkbox("Binarisation adaptative", value=True,
+    preprocessing["binarize"] = st.sidebar.checkbox("Binarisation adaptative", value=False,
                                                   help="Convertit l'image en noir et blanc de manière adaptative")
-    preprocessing["deskew"] = st.sidebar.checkbox("Redressement automatique", value=True,
+    preprocessing["deskew"] = st.sidebar.checkbox("Redressement automatique", value=False,
                                                help="Corrige l'inclinaison de document")
     
     # 3. Informations sur l'outil
@@ -550,10 +548,10 @@ def main():
         # Créer un bouton de téléchargement des résultats
         create_download_button(output_dir)
     
-    # Pied de page
+    # Pied de page avec le nom de l'auteur et le projet
     st.markdown("""
     <div class="footer">
-        <p>Outil OCR pour l'extraction de données environnementales | Projet INSA Rennes 2025</p>
+        <p>Outil OCR pour l'extraction de données environnementales | Ahmed Sidi Mohamed | INSA Rennes 2025</p>
     </div>
     """, unsafe_allow_html=True)
     
